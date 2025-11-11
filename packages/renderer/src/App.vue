@@ -416,14 +416,9 @@ const downloadArcitect = async ()=>{
               <StatusView v-else-if='AppProperties.state===AppProperties.STATES.STATUS'></StatusView>
               <BugReportView v-else-if='AppProperties.state===AppProperties.STATES.BUG_REPORT'></BugReportView>
               <SettingsView v-else-if='AppProperties.state===AppProperties.STATES.SETTINGS'></SettingsView>
-<<<<<<< HEAD
               <HomeView v-else-if='AppProperties.state===AppProperties.STATES.HOME'></HomeView>
-
-              <SwateView v-if='AppProperties.load_swate' v-show='AppProperties.state===AppProperties.STATES.EDIT_SWATE'></SwateView>
-=======
               <UserArcsView v-else-if='AppProperties.state===AppProperties.STATES.USER_ARCS' :openArc="openLocalArc"></UserArcsView>
-              <HomeView v-else></HomeView>
->>>>>>> localfeature
+              <SwateView v-if='AppProperties.load_swate' v-show='AppProperties.state===AppProperties.STATES.EDIT_SWATE'></SwateView>
             </template>
           </q-splitter>
         </q-page>
