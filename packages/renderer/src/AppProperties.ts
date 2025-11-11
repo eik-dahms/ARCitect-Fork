@@ -18,6 +18,7 @@ const AppProperties: {
     HOME: 0,
 
     OPEN_DATAHUB: 101,
+    USER_ARCS: 102,
     EDIT_SWATE: 203,
 
     GIT_COMMIT: 501,
@@ -162,7 +163,7 @@ const deleteDataHub = async (host: string)=>{
 
 const init = async ()=>{
   await AppProperties.read_config();
-  watch(AppProperties.config, ()=>{
+  watch(AppProperties.config, () => {
     window.ipc.invoke('LocalFileSystemService.writeConfig', JSON.stringify(AppProperties.config));
   });
   await get_datahubs();

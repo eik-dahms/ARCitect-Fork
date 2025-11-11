@@ -5,6 +5,7 @@ import {LocalFileSystemService} from '/@/LocalFileSystemService';
 import {DataHubService} from '/@/DataHubService';
 import {InternetService} from '/@/InternetService';
 import {GitService} from '/@/GitService';
+import {LocalArcService} from '/@/LocalArcService';
 import os from 'os';
 import fs from 'fs';
 
@@ -102,6 +103,7 @@ app.whenReady()
   .then(LocalFileSystemService.init)
   .then(InternetService.init)
   .then(GitService.init)
+  .then(LocalArcService.init)
   .then(restoreOrCreateWindow)
   .then(runTests)
   .catch((e) => console.error('Failed create window:', e));

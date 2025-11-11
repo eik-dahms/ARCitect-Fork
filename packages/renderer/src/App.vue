@@ -17,6 +17,7 @@ import SwateView from './views/SwateView.vue';
 import ValidationView from './views/ValidationView.vue';
 import StatusView from './views/StatusView/StatusView.vue';
 import SettingsView from './views/SettingsView.vue';
+import UserArcsView from './views/UserArcs/UserArcsView.vue';
 
 import ConfirmationDialog from './dialogs/ConfirmationDialog.vue';
 import GitDialog from './dialogs/GitDialog.vue';
@@ -51,11 +52,14 @@ const iProps = reactive({
   new_version: ''
 });
 
-const openLocalArc = async (path: string | null | void) =>{
+const openLocalArc = async (path: string | null | void, changeState: boolean = true) =>{
   if(!path) path = await window.ipc.invoke('LocalFileSystemService.selectDir', ['Select local ARC','Select local ARC']);
   if(!path) return;
 
+  // should be state
+  if (changeState){
   AppProperties.state=AppProperties.STATES.HOME;
+  }
 
   let isOpen = await ArcControlService.readARC(path);
   if(!isOpen){
@@ -284,6 +288,9 @@ const test = async ()=>{
           <ToolbarButton text='Download ARC' icon='cloud_download' @clicked='AppProperties.state=AppProperties.STATES.OPEN_DATAHUB'>
             <a_tooltip> Download an ARC from the DataHUB</a_tooltip>
           </ToolbarButton>
+          <ToolbarButton text='Your Arcs' icon='computer' @clicked='AppProperties.state=AppProperties.STATES.USER_ARCS'>
+            <a_tooltip> List local Arcs</a_tooltip>
+          </ToolbarButton>
 
           <q-separator />
 
@@ -400,6 +407,7 @@ const test = async ()=>{
               <ValidationView v-else-if='AppProperties.state===AppProperties.STATES.VALIDATION'></ValidationView>
               <StatusView v-else-if='AppProperties.state===AppProperties.STATES.STATUS'></StatusView>
               <SettingsView v-else-if='AppProperties.state===AppProperties.STATES.SETTINGS'></SettingsView>
+              <UserArcsView v-else-if='AppProperties.state===AppProperties.STATES.USER_ARCS' :openArc="openLocalArc"></UserArcsView>
               <HomeView v-else></HomeView>
             </template>
           </q-splitter>
