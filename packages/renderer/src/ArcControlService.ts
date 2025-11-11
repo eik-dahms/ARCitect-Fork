@@ -103,6 +103,8 @@ const ArcControlService = {
     ArcControlService.props.git_initialized = git_initialized[0];
     console.log(arc);
 
+    window.ipc.invoke('LocalArcService.addLocalArc', arc_root);
+
     ArcControlService.props.super_busy = false;
 
     return true;

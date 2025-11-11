@@ -7,6 +7,7 @@ exposeInMainWorld(
       // From render to main.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       send: (channel: string, args: any[]) => {
+        console.log(`ipcRenderer.send(${channel}, ${args})`);
         ipcRenderer.send(channel, args);
       },
       // From main to render.
